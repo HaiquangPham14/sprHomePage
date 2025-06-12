@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,41 +12,62 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* CHỈNH SỬA CHÍNH: Ngăn scroll cả chiều ngang và dọc */
+        }
+
+        /* Fixed Background Container */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1000;
+            background: url('https://cdn.jsdelivr.net/gh/HaiquangPham14/sprHomePage@main/newUpdate.png') no-repeat center center;
+            background-size: contain;
+            background-attachment: fixed;
+            background-color: #000;
+        }
+
         body {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-            color: #ffffff;
+            background: none;
+            color: #fff;
             min-height: 100vh;
+            min-width: 100vw;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden; /* Đảm bảo body không tạo scroll */
         }
-        
+
         /* Particle Canvas */
         #particles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
+            width: 100vw;
+            height: 100vh;
+            z-index: -999;
             pointer-events: none;
         }
-        
+
         /* Bubble Effect */
         .bubbles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+            z-index: -998;
             overflow: hidden;
         }
-        
+
         .bubble {
             position: absolute;
             bottom: -100px;
@@ -55,14 +77,14 @@
             border-radius: 50%;
             animation: rise 10s infinite ease-in;
         }
-        
+
         .bubble:nth-child(1) {
             width: 20px;
             height: 20px;
             left: 10%;
             animation-duration: 8s;
         }
-        
+
         .bubble:nth-child(2) {
             width: 15px;
             height: 15px;
@@ -70,7 +92,7 @@
             animation-duration: 5s;
             animation-delay: 1s;
         }
-        
+
         .bubble:nth-child(3) {
             width: 25px;
             height: 25px;
@@ -78,7 +100,7 @@
             animation-duration: 7s;
             animation-delay: 2s;
         }
-        
+
         .bubble:nth-child(4) {
             width: 18px;
             height: 18px;
@@ -86,7 +108,7 @@
             animation-duration: 11s;
             animation-delay: 0s;
         }
-        
+
         .bubble:nth-child(5) {
             width: 22px;
             height: 22px;
@@ -94,7 +116,7 @@
             animation-duration: 6s;
             animation-delay: 1s;
         }
-        
+
         .bubble:nth-child(6) {
             width: 16px;
             height: 16px;
@@ -102,7 +124,7 @@
             animation-duration: 8s;
             animation-delay: 3s;
         }
-        
+
         .bubble:nth-child(7) {
             width: 28px;
             height: 28px;
@@ -110,7 +132,7 @@
             animation-duration: 12s;
             animation-delay: 2s;
         }
-        
+
         @keyframes rise {
             0% {
                 bottom: -100px;
@@ -124,86 +146,40 @@
                 transform: translateX(-200px);
             }
         }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            margin: 20px 0 40px;
+
+        /* Content Container for Buttons - CẬP NHẬT */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Căn giữa theo chiều dọc */
             width: 100%;
-            max-width: 500px;
-        }
-        
-        .logo {
-            width: 180px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px rgba(229, 184, 0, 0.5));
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(229, 184, 0, 0.7);
-            background: linear-gradient(to right, #E5B800, #C68E00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 350px;
-            margin: 0 auto;
-            line-height: 1.6;
-            color: #C68E00;
-        }
-        
-        /* Beer Image */
-        .beer-container {
+            height: 100%; /* Chiếm toàn bộ chiều cao */
             position: relative;
-            width: 100%;
-            max-width: 320px;
-            margin: 20px auto 40px;
-            perspective: 1000px;
+            z-index: 10;
         }
-        
-        .beer-image {
-            width: 100%;
-            max-height: 450px;
-            object-fit: contain;
-            transition: transform 0.5s ease;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
-            transform-style: preserve-3d;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
+
         /* Buttons */
         .buttons-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
             width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
+            max-width: 600px;
+            z-index: 10;
+            transform: translateY(-10vh); /* Điều chỉnh vị trí nếu cần */
         }
-        
+
         .ar-button {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 25px;
+            padding: 25px 40px;
             background: linear-gradient(135deg, #E5B800 0%, #C68E00 100%);
             border: none;
             border-radius: 15px;
-            color: #1a1a1a;
-            font-size: 1.1rem;
+            color: #1a1a1a !important;
+            font-size: 1.3rem;
             font-weight: 600;
             text-decoration: none;
             text-transform: uppercase;
@@ -214,17 +190,18 @@
             overflow: hidden;
             cursor: pointer;
             text-align: center;
+            width: 100%;
         }
-        
+
         .ar-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(229, 184, 0, 0.6);
         }
-        
+
         .ar-button:active {
             transform: translateY(0);
         }
-        
+
         .ar-button::before {
             content: '';
             position: absolute;
@@ -235,72 +212,62 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: 0.5s;
         }
-        
+
         .ar-button:hover::before {
             left: 100%;
         }
-        
-        /* Footer */
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            width: 100%;
-            padding: 20px;
-            border-top: 1px solid rgba(229, 184, 0, 0.2);
-            color: #C68E00;
-        }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
             .ar-button {
-                padding: 18px 20px;
-                font-size: 1rem;
+                padding: 22px 35px;
+                font-size: 1.2rem;
+            }
+            .buttons-container {
+                gap: 25px;
+                max-width: 500px;
             }
         }
-        
+
         @media (max-width: 480px) {
-            .header {
-                margin: 10px 0 30px;
-            }
-            
-            .logo {
-                width: 150px;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .beer-container {
-                max-width: 280px;
-                margin-bottom: 30px;
-            }
-            
             .ar-button {
-                padding: 16px 15px;
-                font-size: 0.9rem;
+                padding: 18px 25px;
+                font-size: 1rem;
             }
-            
+            .buttons-container {
+                gap: 20px;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            /* Điều chỉnh cho màn hình ngắn */
             .buttons-container {
                 gap: 15px;
+                transform: translateY(0);
+            }
+            .ar-button {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* For very wide screens */
+        @media (min-width: 1200px) {
+            .buttons-container {
+                max-width: 650px;
             }
         }
     </style>
 </head>
+
 <body>
+    <!-- Fixed Background -->
+    <div class="background-container"></div>
+    
     <!-- Particle Canvas -->
     <canvas id="particles"></canvas>
-    
+
     <!-- Bubbles Background Effect -->
     <div class="bubbles">
         <div class="bubble"></div>
@@ -311,39 +278,30 @@
         <div class="bubble"></div>
         <div class="bubble"></div>
     </div>
-    
-    <div class="header">
-        <img src="https://cdn.jsdelivr.net/gh/HaiquangPham14/Sapporo2Video_2@main/thumbnail_Sapporo-logo.png" alt="Sapporo Logo" class="logo">
-        <h1>TRẢI NGHIỆM THỰC TẾ ẢO</h1>
-        <p class="subtitle">Khám phá thế giới Sapporo qua công nghệ AR độc đáo. Chạm để bắt đầu trải nghiệm!</p>
-    </div>
-    
-    <div class="beer-container">
-        <img src="https://cdn.jsdelivr.net/gh/HaiquangPham14/Sapporo2Video@main/Intro.png" alt="Sapporo Premium Beer" class="beer-image">
-    </div>
-    
-    <div class="buttons-container">
-        <a href="https://sapporo.stoo.vn/AR1" class="ar-button">
-            <span>Trải nghiệm chuẩn bị nguyên liệu</span>
-        </a>
-        <a href="https://sapporo.stoo.vn/AR2" class="ar-button">
-            <span>Trải nghiệm nấu bia</span>
-        </a>
-        <a href="https://sapporo.stoo.vn/AR3" class="ar-button">
-            <span>Trải nghiệm đóng gói</span>
-        </a>
-    </div>
-    
-    <div class="footer">
-        <p>Sapporo Premium Beer - Chất lượng Nhật Bản | © 2025 Bản quyền thuộc về Sapporo</p>
+
+    <div class="content-container">
+        <div class="buttons-container">
+            <a href="https://sapporo.stoo.vn/AR1" class="ar-button">
+                <span>Quy trình làm bia 1</span>
+            </a>
+            <a href="https://sapporo.stoo.vn/AR2" class="ar-button">
+                <span>Quy trình làm bia 2</span>
+            </a>
+            <a href="https://sapporo.stoo.vn/AR3" class="ar-button">
+                <span>Quy trình làm bia 3</span>
+            </a>
+        </div>
     </div>
 
     <script>
         // Particle Background
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
 
         const particles = [];
         class Particle {
@@ -381,28 +339,17 @@
         animateParticles();
 
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            setCanvasSize();
         });
 
-        // Beer Image Hover Effect
-        const beerImage = document.querySelector('.beer-image');
-        
-        beerImage.addEventListener('mouseenter', () => {
-            beerImage.style.animation = 'none';
-            setTimeout(() => {
-                beerImage.style.animation = 'float 3s ease-in-out infinite';
-            }, 10);
-        });
-        
         // Page Load Effects
         document.addEventListener('DOMContentLoaded', () => {
             const bubblesContainer = document.querySelector('.bubbles');
-            
+
             // Create Additional Bubbles
             for (let i = 0; i < 5; i++) {
                 const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
+                bubble.classList.add('bubble'); 
                 bubble.style.left = `${Math.random() * 100}%`;
                 bubble.style.width = `${Math.random() * 15 + 10}px`;
                 bubble.style.height = bubble.style.width;
@@ -410,17 +357,17 @@
                 bubble.style.animationDelay = `${Math.random() * 5}s`;
                 bubblesContainer.appendChild(bubble);
             }
-            
+
             // Button Click Effects
             const buttons = document.querySelectorAll('.ar-button');
             buttons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
+
                     // Click Animation
                     button.style.transform = 'scale(0.95)';
                     button.style.boxShadow = '0 4px 10px rgba(229, 184, 0, 0.4)';
-                    
+
                     setTimeout(() => {
                         button.style.transform = '';
                         button.style.boxShadow = '0 8px 20px rgba(229, 184, 0, 0.4)';
@@ -429,7 +376,18 @@
                     }, 200);
                 });
             });
+            
+            // Ngăn sự kiện scroll bằng JavaScript (dự phòng)
+            document.addEventListener('wheel', preventScroll, { passive: false });
+            document.addEventListener('touchmove', preventScroll, { passive: false });
+            
+            function preventScroll(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
         });
     </script>
 </body>
+
 </html>
